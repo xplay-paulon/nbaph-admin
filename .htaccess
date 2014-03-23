@@ -1,0 +1,17 @@
+#AuthName "Restricted Area"
+#AuthType Basic
+#AuthUserFile admin_access
+#AuthGroupFile /dev/null
+#require valid-user
+
+php_value upload_max_filesize 512M
+php_value post_max_size 512M
+php_value memory_limit 16M
+
+#RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} -s [OR]
+#RewriteCond %{REQUEST_FILENAME} -l [OR]
+#RewriteCond %{REQUEST_FILENAME} -d
+
+#RewriteRule ^.*$ - [NC,L]
+#RewriteRule ^.*$ index.php [NC,L]
