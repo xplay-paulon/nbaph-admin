@@ -2,7 +2,9 @@
 include('../sql.php');
 
 if ($_POST['action']) {
+	$filename = strtolower(urlencode(str_replace("ñ", "n", $_POST['writer']))) . ".jpg";
    if (move_uploaded_file($_FILES['image']['tmp_name'], "../images/personalities/" . strtolower(urlencode(str_replace("ñ", "n", $_POST['writer']))) . ".jpg")) {
+	exec('sudo aws s3 cp /var/www/html/nba/images/personalities/'. $filename .' s3://nbaphfiles/images/personalities/'.$filename.' --acl public-read');
       $outcome = "Upload successful";
    }
    else {
@@ -95,16 +97,7 @@ while($row = mysql_fetch_array($results)) {
                <?php echo stripslashes($row['Blogger']); ?>
             </td>
             <td>
-<?php
-   if (file_exists("../images/personalities/" . strtolower(urlencode(str_replace("ñ", "n", $row['Blogger']))) . ".jpg")) {
-?>
-               <img src="../images/personalities/<?php echo strtolower(urlencode(str_replace("ñ", "n", $row['Blogger']))); ?>.jpg">
-<?php
-   }
-   else {
-      echo "no picture";
-   }
-?>
+               <img src="http://ph.nba.com/images/personalities/<?php echo str_replace(" ","%2B",strtolower($row['Blogger'])); ?>.jpg">
             </td>
          </tr>
 <?php

@@ -76,7 +76,7 @@ tinymce.init({
     plugins: [
         "advlist autolink lists link image charmap print preview anchor",
         "searchreplace visualblocks code fullscreen",
-        "insertdatetime media table contextmenu paste moxiemanager"
+        "insertdatetime media table contextmenu paste"
     ],
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
 });
@@ -487,7 +487,7 @@ while($row = mysql_fetch_array($results)) {
                <?php echo stripslashes($row['BlogAffiliation']); ?>
             </td>
             <td>
-               <img src="../thumbs.php?filename=images/personalities/<?php echo stripslashes(str_replace(" ", "", $row['Blogger'])); ?>.jpg&width=75&height=75">
+               <img src="http://ph.nba.com/images/personalities/<?php echo stripslashes(str_replace(" ", "%2B", strtolower($row['Blogger']))); ?>.jpg">
             </td>
             <td>
                <form action="personalities.php?page=<?php echo $_GET['page']; ?>" method="post" onsubmit="return verify_delete(<?php echo $row['BlogID']; ?>)">
